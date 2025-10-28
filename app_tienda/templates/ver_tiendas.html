@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block titulo %}Tiendas | Puestos{% endblock %}
+
+{% block contenido %}
+<div class="page-header">
+    <h2>Tiendas Registradas</h2>
+    <a href="{% url 'app_tienda:agregar_tienda' %}" class="btn btn-primary">+ Agregar Tienda</a>
+</div>
+
+<ul class="artist-grid">
+    {% for tienda in tiendas %}
+    <li class="artist-card">
+        <a href="{% url 'app_tienda:info_tienda' tienda.id %}">
+            {% if tienda.foto %}
+                <img src="{{ tienda.foto.url }}" alt="Foto de {{ tienda.nombre }}" class="artist-img">
+            {% else %}
+                <div class="artist-placeholder">🎵</div>
+            {% endif %}
+            <h3>{{ tienda.nombre }}</h3>
+            <p class="artist-nationality">{{ tienda.tipo }}</p>
+            <p class="artist-nationality">{{ tienda.ubicacion }}</p>
+            <p class="artist-nationality">{{ tienda.horario }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="no-artists">No hay tiendas registradas.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

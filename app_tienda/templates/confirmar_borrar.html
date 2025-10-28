@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block titulo %}Eliminar Tienda | Puestos{% endblock %}
+
+{% block contenido %}
+<h2>¿Estás seguro de que quieres borrar "{{ tienda.nombre }}"?</h2>
+<p>Esta acción no se puede deshacer.</p>
+<form method="post">
+    {% csrf_token %}
+    <div class="actions">
+        <button type="submit" class="btn btn-danger">Sí, Borrar</button>
+        <a href="{% url 'app_tienda:info_tienda' tienda.id %}" class="btn">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

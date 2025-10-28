@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block nombre %}{{ nombre }} | Puestos{% endblock %}
+
+{% block contenido %}
+<h2>{{ nombre }}</h2>
+<form method="post" enctype="multipart/form-data" class="form-styled">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="actions">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'app_tienda:ver_tiendas' %}" class="btn">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

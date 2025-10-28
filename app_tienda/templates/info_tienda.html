@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ tienda.nombre }} | Puestos{% endblock %}
+
+{% block contenido %}
+<article class="artist-detail">
+    <div class="artist-banner">
+        {% if tienda.foto %}
+            <img src="{{ tienda.foto.url }}" alt="Foto de {{ tienda.nombre }}" class="detail-photo">
+        {% else %}
+            <div class="detail-placeholder">👤</div>
+        {% endif %}
+        <div class="artist-info">
+            <h1>{{ tienda.nombre }}</h1>
+            <h3>{{ tienda.tipo }}</h3>
+            <h3>{{ tienda.ubicacion }}</h3>
+            <h3>{{ tienda.horario }}</h3>
+        </div>
+    </div>
+
+    <div class="detail-actions">
+        <a href="{% url 'app_tienda:editar_tienda' tienda.id %}" class="btn btn-secondary">✏️ Editar</a>
+        <a href="{% url 'app_tienda:borrar_tienda' tienda.id %}" class="btn btn-danger">🗑️ Borrar</a>
+    </div>
+
+    <section class="songs-section">
+        <h2>Empleados</h2>
+        {% if tienda.empleados.all %}
+        <ul class="song-list">
+            {% for empleado in tienda.empleados.all %}
+            <li>{{ empleado.nombre }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="empty-message">Esta tienda no tiene empleados registrados.</p>
+        {% endif %}
+    </section>
+</article>
+{% endblock %}
